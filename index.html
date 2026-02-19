@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FilaPropus Waage WebFlash</title>
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --panel: #141414;
+      --text: #f4f1e8;
+      --muted: #b5a982;
+      --gold: #d9aa40;
+      --gold-soft: rgba(217,170,64,0.2);
+      --border: #2a2312;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Cinzel", "Playfair Display", "Segoe UI", serif;
+      background: radial-gradient(900px 500px at 10% -10%, rgba(217,170,64,0.14), transparent 60%),
+                  radial-gradient(800px 450px at 95% 5%, rgba(217,170,64,0.08), transparent 60%),
+                  #0a0a0a;
+      color: var(--text);
+      min-height: 100vh;
+    }
+    header {
+      padding: 28px 24px 12px;
+      text-align: center;
+    }
+    h1 {
+      margin: 0 0 6px;
+      font-size: 1.8rem;
+      letter-spacing: 0.04em;
+      color: var(--gold);
+    }
+    p.subtitle {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+    main {
+      max-width: 780px;
+      margin: 24px auto 48px;
+      padding: 0 18px;
+    }
+    .card {
+      background: linear-gradient(180deg, #171717, #121212);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px 22px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      margin-bottom: 18px;
+    }
+    .label {
+      color: var(--muted);
+      text-transform: uppercase;
+      font-weight: 700;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      margin-bottom: 8px;
+    }
+    .steps {
+      line-height: 1.6;
+      color: var(--text);
+    }
+    .steps li { margin: 6px 0; }
+    .warning {
+      background: rgba(217,170,64,0.08);
+      border: 1px solid var(--gold);
+      border-radius: 10px;
+      padding: 10px 12px;
+      color: var(--text);
+      font-size: 0.9rem;
+    }
+    .install {
+      display: flex;
+      justify-content: center;
+      padding: 12px 0 6px;
+    }
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.8rem;
+      padding: 10px 12px 28px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>FilaPropus Waage WebFlash</h1>
+    <p class="subtitle">Firmware + LittleFS direkt im Browser flashen (ESP32)</p>
+  </header>
+
+  <main>
+    <section class="card">
+      <div class="label">Schritt 1</div>
+      <ol class="steps">
+        <li>ESP32 per USB verbinden.</li>
+        <li>Chrome oder Edge verwenden (WebSerial erforderlich).</li>
+        <li>Unten auf "Flash" klicken.</li>
+      </ol>
+      <div class="warning">Hinweis: Der Flash-Vorgang loescht vorhandene Daten auf dem ESP32.</div>
+    </section>
+
+    <section class="card">
+      <div class="label">Firmware installieren</div>
+      <div class="install">
+        <esp-web-install-button manifest="manifest.json">
+          <button slot="activate">Flash</button>
+        </esp-web-install-button>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="label">Erster Start</div>
+      <ol class="steps">
+        <li>Nach dem Flashen startet der ESP32 neu.</li>
+        <li>Mit dem WLAN "FilaPropus" verbinden (Config Portal).</li>
+        <li>Dann im Browser http://filapropus.local oeffnen.</li>
+      </ol>
+    </section>
+  </main>
+
+  <footer>
+    FilaPropus Waage &middot; Browser Flash Tool
+  </footer>
+
+  <script type="module" src="https://unpkg.com/esp-web-tools@9/dist/web/install-button.js?module"></script>
+</body>
+</html>
