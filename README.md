@@ -17,6 +17,8 @@ Browser-based flashing for the FilaPropus Waage (ESP32) using ESP Web Tools.
 
 Open `index.html` in a web server (GitHub Pages, nginx, etc.), then click **Flash**.
 
+GitHub Pages: https://janez76.github.io/waage-webflash/
+
 ## Build artifacts
 
 This repo expects:
