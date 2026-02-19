@@ -23,8 +23,8 @@ GitHub Pages: https://janez76.github.io/waage-webflash/
 
 This repo expects:
 
-- `bin/upgrade_filaman_firmware_v1.3.0.bin`
-- `bin/upgrade_filaman_website_v1.3.0.bin`
+- `bin/upgrade_filapropus_firmware_v1.3.0.bin`
+- `bin/upgrade_filapropus_website_v1.3.0.bin`
 
 ## Notes
 
