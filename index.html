@@ -3,134 +3,290 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>FilaPropus Waage WebFlash</title>
+  <title>Waage Spool Propus - WebFlash</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #0a0a0a;
-      --panel: #141414;
-      --text: #f4f1e8;
-      --muted: #b5a982;
-      --gold: #d9aa40;
-      --gold-soft: rgba(217,170,64,0.2);
-      --border: #2a2312;
+      --bg: #0b1120;
+      --bg-elevated: #111827;
+      --bg-soft: #1a2540;
+      --text: #f0f4f8;
+      --text-muted: #8b9dc3;
+      --accent: #00d4aa;
+      --accent-2: #38bdf8;
+      --border: rgba(255, 255, 255, 0.06);
+      --gradient-hero: linear-gradient(135deg, #0b1120 0%, #0f1b33 50%, #0b1120 100%);
+      --gradient-accent: linear-gradient(135deg, #00d4aa, #38bdf8);
+      --shadow-lg: 0 24px 48px rgba(0, 0, 0, 0.2);
+      --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.15);
+      --radius-lg: 16px;
+      --radius-md: 12px;
+      --radius-sm: 8px;
+      --focus-ring: rgba(0, 212, 170, 0.15);
+      --btn-primary-text: #0b1120;
+      --error-bg: rgba(239, 68, 68, 0.1);
+      --error-border: rgba(239, 68, 68, 0.3);
+      --error-text: #fca5a5;
+      --success-bg: rgba(0, 212, 170, 0.1);
+      --success-border: rgba(0, 212, 170, 0.3);
+      --success-text: #6ee7b7;
     }
-    * { box-sizing: border-box; }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
-      margin: 0;
-      font-family: "Cinzel", "Playfair Display", "Segoe UI", serif;
-      background: radial-gradient(900px 500px at 10% -10%, rgba(217,170,64,0.14), transparent 60%),
-                  radial-gradient(800px 450px at 95% 5%, rgba(217,170,64,0.08), transparent 60%),
-                  #0a0a0a;
+      font-family: "Inter", "SF Pro Display", "Segoe UI", system-ui, sans-serif;
+      background: var(--gradient-hero);
       color: var(--text);
       min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      -webkit-font-smoothing: antialiased;
+      position: relative;
+      overflow: hidden;
     }
+
+    body::before {
+      content: "";
+      position: absolute;
+      top: -20%;
+      right: -10%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, var(--accent), transparent 70%);
+      opacity: 0.03;
+      pointer-events: none;
+    }
+    body::after {
+      content: "";
+      position: absolute;
+      bottom: -20%;
+      left: -10%;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, var(--accent-2), transparent 70%);
+      opacity: 0.03;
+      pointer-events: none;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 480px;
+      position: relative;
+      z-index: 1;
+    }
+
     header {
-      padding: 28px 24px 12px;
       text-align: center;
+      margin-bottom: 24px;
     }
-    h1 {
-      margin: 0 0 6px;
-      font-size: 1.8rem;
-      letter-spacing: 0.04em;
-      color: var(--gold);
-    }
-    p.subtitle {
-      margin: 0;
-      color: var(--muted);
-      font-size: 0.95rem;
-    }
-    main {
-      max-width: 780px;
-      margin: 24px auto 48px;
-      padding: 0 18px;
-    }
-    .card {
-      background: linear-gradient(180deg, #171717, #121212);
-      border: 1px solid var(--border);
+
+    .logo {
+      width: 52px;
+      height: 52px;
+      margin: 0 auto 14px;
       border-radius: 14px;
-      padding: 20px 22px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-      margin-bottom: 18px;
+      background: var(--gradient-accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    .label {
-      color: var(--muted);
-      text-transform: uppercase;
+
+    .logo svg {
+      width: 28px;
+      height: 28px;
+      fill: var(--btn-primary-text);
+    }
+
+    h1 {
+      font-size: 1.3rem;
       font-weight: 700;
+      background: var(--gradient-accent);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 4px;
+    }
+
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 0.8rem;
+    }
+
+    .card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      margin-bottom: 12px;
+      box-shadow: var(--shadow-md);
+      animation: fadeInUp 0.4s ease both;
+    }
+
+    .card:nth-child(2) { animation-delay: 0.1s; }
+    .card:nth-child(3) { animation-delay: 0.2s; }
+
+    .label {
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-weight: 600;
       font-size: 0.7rem;
-      letter-spacing: 0.2em;
+      letter-spacing: 0.08em;
+      margin-bottom: 10px;
+    }
+
+    ol {
+      list-style: none;
+      counter-reset: steps;
+      padding: 0;
+    }
+
+    ol li {
+      counter-increment: steps;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
       margin-bottom: 8px;
-    }
-    .steps {
-      line-height: 1.6;
+      font-size: 0.875rem;
+      line-height: 1.5;
       color: var(--text);
     }
-    .steps li { margin: 6px 0; }
+
+    ol li::before {
+      content: counter(steps);
+      flex-shrink: 0;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--accent);
+    }
+
     .warning {
-      background: rgba(217,170,64,0.08);
-      border: 1px solid var(--gold);
-      border-radius: 10px;
+      background: var(--error-bg);
+      border: 1px solid var(--error-border);
+      border-radius: var(--radius-sm);
       padding: 10px 12px;
-      color: var(--text);
-      font-size: 0.9rem;
+      color: var(--error-text);
+      font-size: 0.85rem;
+      margin-top: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
+
+    .warning::before {
+      content: "!";
+      flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: rgba(239, 68, 68, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--error-text);
+    }
+
+    .success-hint {
+      background: var(--success-bg);
+      border: 1px solid var(--success-border);
+      border-radius: var(--radius-sm);
+      padding: 10px 12px;
+      color: var(--success-text);
+      font-size: 0.85rem;
+      margin-top: 12px;
+    }
+
     .install {
       display: flex;
       justify-content: center;
-      padding: 12px 0 6px;
+      padding: 6px 0;
     }
+
     .flash-button {
-      background: linear-gradient(135deg, var(--gold), #a67819);
-      color: #111;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 12px 22px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
+      background: var(--gradient-accent);
+      color: var(--btn-primary-text);
+      border: none;
+      border-radius: var(--radius-sm);
+      padding: 12px 32px;
+      font-weight: 600;
+      font-size: 0.875rem;
+      letter-spacing: 0.04em;
       text-transform: uppercase;
-      box-shadow: 0 8px 18px rgba(0,0,0,0.4), 0 0 18px var(--gold-soft);
       cursor: pointer;
-      transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
+      transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+      font-family: "Inter", system-ui, sans-serif;
     }
+
     .flash-button:hover {
       transform: translateY(-1px);
-      filter: brightness(1.05);
-      box-shadow: 0 12px 26px rgba(0,0,0,0.5), 0 0 26px var(--gold-soft);
+      box-shadow: 0 8px 24px rgba(0, 212, 170, 0.2);
+      opacity: 0.95;
     }
+
     .flash-button:active {
       transform: translateY(0);
     }
+
     .flash-button:focus-visible {
-      outline: 2px solid var(--gold);
-      outline-offset: 3px;
+      outline: none;
+      box-shadow: 0 0 0 3px var(--focus-ring);
     }
+
     footer {
       text-align: center;
-      color: var(--muted);
-      font-size: 0.8rem;
-      padding: 10px 12px 28px;
+      color: var(--text-muted);
+      font-size: 0.7rem;
+      padding-top: 20px;
+      letter-spacing: 0.02em;
     }
+
     @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(10px); }
+      from { opacity: 0; transform: translateY(12px); }
       to { opacity: 1; transform: translateY(0); }
     }
-    .card { animation: fadeInUp 0.4s ease both; }
+
+    @media (max-width: 480px) {
+      body { padding: 16px; }
+      .card { padding: 16px; }
+      h1 { font-size: 1.15rem; }
+    }
   </style>
 </head>
 <body>
-  <header>
-    <h1>FilaPropus Waage WebFlash</h1>
-    <p class="subtitle">Firmware + LittleFS direkt im Browser flashen (ESP32)</p>
-  </header>
+  <div class="container">
+    <header>
+      <div class="logo">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+        </svg>
+      </div>
+      <h1>Waage Spool Propus</h1>
+      <p class="subtitle">ESP32 Firmware WebFlash</p>
+    </header>
 
-  <main>
     <section class="card">
-      <div class="label">Schritt 1</div>
-      <ol class="steps">
-        <li>ESP32 per USB verbinden.</li>
+      <div class="label">Vorbereitung</div>
+      <ol>
+        <li>ESP32 per USB mit dem Computer verbinden.</li>
         <li>Chrome oder Edge verwenden (WebSerial erforderlich).</li>
-        <li>Unten auf "Flash" klicken.</li>
+        <li>Unten auf "Flash" klicken und den Port auswaehlen.</li>
       </ol>
-      <div class="warning">Hinweis: Der Flash-Vorgang loescht vorhandene Daten auf dem ESP32.</div>
+      <div class="warning">Der Flash-Vorgang loescht vorhandene Daten auf dem ESP32.</div>
     </section>
 
     <section class="card">
@@ -144,17 +300,18 @@
 
     <section class="card">
       <div class="label">Erster Start</div>
-      <ol class="steps">
-        <li>Nach dem Flashen startet der ESP32 neu.</li>
-        <li>Mit dem WLAN "FilaPropus" verbinden (Config Portal).</li>
-        <li>Dann im Browser http://filapropus.local oeffnen.</li>
+      <ol>
+        <li>Nach dem Flashen startet der ESP32 automatisch neu.</li>
+        <li>Falls noch kein WLAN konfiguriert ist: mit dem WLAN "FilaMan" verbinden (Config Portal).</li>
+        <li>Danach die Weboberflaeche ueber die IP-Adresse im Browser oeffnen (oder ggf. per mDNS).</li>
       </ol>
+      <div class="success-hint">Nach der WLAN-Konfiguration ist die Waage ueber das lokale Netzwerk erreichbar.</div>
     </section>
-  </main>
 
-  <footer>
-    FilaPropus Waage &middot; Browser Flash Tool
-  </footer>
+    <footer>
+      Waage Spool Propus &middot; v1.3.0
+    </footer>
+  </div>
 
   <script type="module" src="https://unpkg.com/esp-web-tools@9/dist/web/install-button.js?module"></script>
 </body>
